@@ -1,0 +1,140 @@
+<html>
+
+    <head>
+
+        <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+        <link href="/static/dist/css/roboto.min.css" rel="stylesheet">
+        <link href="/static/dist/css/material.min.css" rel="stylesheet">
+        <link href="/static/dist/css/ripples.min.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <!-- Your site -->
+          <div class="navbar navbar-default nav-info">
+              <div class="col-sm-8 col-sm-offset-2">
+                  <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="/">BookCan</a>
+                  </div>
+                  <div class="navbar-collapse collapse navbar-inverse-collapse">
+                      <ul class="nav navbar-nav">
+                          <li><a href="{{url_for('index')}}">书罐</a></li>
+                          <li><a href="{{url_for('msg_board', page=1)}}">留言板</a></li>
+                          <!-- <li class="dropdown">
+                              <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0)">Action</a></li>
+                                  <li><a href="javascript:void(0)">Another action</a></li>
+                                  <li><a href="javascript:void(0)">Something else here</a></li>
+                                  <li class="divider"></li>
+                                  <li class="dropdown-header">Dropdown header</li>
+                                  <li><a href="javascript:void(0)">Separated link</a></li>
+                                  <li><a href="javascript:void(0)">One more separated link</a></li>
+                              </ul>
+                          </li> -->
+                      </ul>
+                      <!-- <form class="navbar-form navbar-left">
+                          <input type="text" class="form-control col-lg-8" placeholder="Search">
+                      </form> -->
+                      <ul class="nav navbar-nav navbar-right">
+                      {% if not current_user.is_authenticated %}
+                          <li><a href="{{url_for('login')}}">登陆</a></li>
+                          <li><a href="{{url_for('regist')}}">注册</a></li>
+                      {% else %}
+                          <li class="dropdown">
+                              <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">{{current_user.name}} <b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="{{url_for('create_can')}}">新建书罐</a></li>
+                                  <li><a href="javascript:void(0)">我的信息</a></li>
+                                  <li><a href="javascript:void(0)">设置</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="{{url_for('logout')}}">退出</a></li>
+                              </ul>
+                          </li>
+                      {% endif %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="container">
+                <div class="alert alert-dismissible alert-warning">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  {% for message in messages %}
+                    <p>{{message.decode('utf-8')}}</p>
+                  {% endfor %}
+                </div>
+            </div>
+          {% endif %}
+          {% endwith %}
+
+
+          {% macro render_pagination(pagination, endpoint) %}
+            <div class="text-center">
+                <ul class="pagination">
+                {% if pagination.has_prev %}
+                <li><a href="{{url_for(endpoint, id=id, page=1)}}">«</a></li>
+                {% else %}
+                <li class="disabled"><a href="javascript:void(0)">«</a></li>
+                {% endif %}
+
+                {%- for page in pagination.iter_pages() %}
+                  {% if page %}
+                    {% if page != pagination.page %}
+                      <li><a href="{{ url_for(endpoint, id=id, page=page) }}">{{ page }}</a></li>
+                    {% else %}
+                      <li><a href=""><strong>{{ page }}</strong></a></li>
+                    {% endif %}
+                  {% else %}
+                    <li><span class=ellipsis>…</span></li>
+                  {% endif %}
+                {%- endfor %}
+
+                {% if pagination.has_next %}
+                <li><a href="{{url_for(endpoint, id=id, page=pagination.count())}}">»</a></li>
+                {% else %}
+                <li class="disabled"><a href="javascript:void(0)">»</a></li>
+                {% endif %}
+                </ul>
+            </div>
+          {% endmacro %}
+
+
+        {% block content %}
+        {% endblock %}
+
+        <footer style="margin-top: 100;">
+          <div class="container">
+              <p>copy bookcan</p>
+          </div>
+        </footer>
+
+        {% block code %}
+        {% endblock %}
+
+
+        <!-- Your site ends -->
+
+        <script src="/static/dist/js/jquery.min.js"></script>
+        <script src="/static/dist/js/bootstrap.min.js"></script>
+
+        <script src="/static/dist/js/ripples.min.js"></script>
+        <script src="/static/dist/js/material.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // This command is used to initialize some elements and make them work properly
+                $.material.init();
+            });
+        </script>
+
+    </body>
+
+</html>

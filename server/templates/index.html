@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-2">
+            <div class="list-group">
+            {% for can in book_can %}
+              <div class="list-group-item">
+                <div class="row-picture">
+                  <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+                </div>
+                <div class="row-content">
+                  <h4 class="list-group-item-heading"><a class="text-muted" href="{{url_for('can_info', id=can.id, page=1)}}">{{can.name}}</a></h4>
+
+                  <p class="list-group-item-text">{{can.intro }}</p>
+                </div>
+              </div>
+              <div class="list-group-separator"></div>
+            {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">最新书籍动态</h3>
+              </div>
+              <div class="panel-body">
+                <table class="table">
+                      <tbody>
+                      {% for book in books %}
+                        <tr>
+                          <th scope="row">{{loop.index}}</th>
+                          <td>{{book.name}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+              </div>
+            </div>
+<!--             <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">书单动态</h3>
+              </div>
+              <div class="panel-body">
+                Panel content
+              </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row">
+        {{ render_pagination(pagination, endpoint) }}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block code %}
+
+
+{% endblock %}

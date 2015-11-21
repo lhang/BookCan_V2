@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+        <div class="col-sm-6 col-sm-offset-2">
+            <div class="row">
+                <div class="list-group">
+                    <div class="jumbotron">
+                      <h2>{{book_can.name}}</h2>
+                      <p>{{book_can.intro}}</p>
+                    </div>
+
+                    {% for book in books %}
+                        <div class="list-group-item">
+                          <div class="row-action-primary">
+                            <i class="mdi-file-folder"></i>
+                          </div>
+                          <div class="row-content">
+                            <div class="action-secondary"><i class="mdi-material-info"></i></div>
+                            <h4 class="list-group-item-heading"><a href="{{book.link}}">{{book.name}}</a></h4>
+
+                            <p class="list-group-item-text">{{book.intro}}</p>
+                          </div>
+                        </div>
+                        <div class="list-group-separator"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="list-group">
+                {% for discuss in discusses %}
+                  <div class="list-group-item">
+                    <div class="row-picture">
+                      <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+                    </div>
+                    <div class="row-content">
+                      <h4 class="list-group-item-heading">{{discuss.user.name}}</h4>
+
+                      <p class="list-group-item-text">{{discuss.content}}</p>
+                    </div>
+                  </div>
+                  <div class="list-group-separator"></div>
+                {% endfor %}
+
+                </br>
+                <div class="list-group-item">
+                    <form action="" method="post">
+                        <fieldset>
+                            <div class="form-group label-floating">
+                              <div class="input-group">
+                                <label class="control-label" for="addon3a">添加回复：</label>
+                                <input name="content" type="text" id="addon3a" class="form-control">
+                                <!-- <p class="help-block">The label is inside the <code>input-group</code> so that it is positioned properly as a placeholder.</p> -->
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-fab btn-fab-mini">
+                                    <i class="mdi-content-send"></i>
+                                  </button>
+                                </span>
+                              </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">创建者</h3>
+              </div>
+              <div class="panel-body">
+                {{book_can.user.name}}
+              </div>
+            </div>
+        </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    </br></br></br></br>
+    <div class="col-sm-4 col-sm-offset-4">
+        <form class="form-horizontal" action="/regist" method="POST">
+        <fieldset>
+            {{ form.csrf_token }}
+            <div class="form-group label-floating">
+              <label class="control-label" for="focusedInput1">输入你的昵称</label>
+              <input name="name" class="form-control" id="focusedInput1" type="text">
+            </div>
+
+            <div class="form-group label-floating">
+              <label class="control-label" for="focusedInput2">输入你的一个邮箱</label>
+              <input name="email" class="form-control" id="focusedInput2" type="emial">
+              <!-- <p class="help-block">You should really write something here</p> -->
+            </div>
+
+            <div class="form-group label-floating">
+              <label class="control-label" for="focusedInput2">密码</label>
+              <input name="passwd" class="form-control" id="focusedInput2" type="password">
+              <!-- <p class="help-block">You should really write something here</p> -->
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 col-lg-offset-4">
+                    <button type="submit" class="btn btn-primary">注册</button>
+                </div>
+            </div>
+        </fieldset>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block code %}
+{% endblock %}
+
