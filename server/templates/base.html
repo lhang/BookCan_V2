@@ -52,8 +52,9 @@
                               <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">{{current_user.name}} <b class="caret"></b></a>
                               <ul class="dropdown-menu">
                                   <li><a href="{{url_for('create_can')}}">新建书罐</a></li>
-                                  <li><a href="javascript:void(0)">我的信息</a></li>
-                                  <li><a href="javascript:void(0)">设置</a></li>
+                                  <li><a href="">更多功能开发中~</a></li>
+                                  <!-- <li><a href="javascript:void(0)">我的信息</a></li>
+                                  <li><a href="javascript:void(0)">设置</a></li> -->
                                   <li class="divider"></li>
                                   <li><a href="{{url_for('logout')}}">退出</a></li>
                               </ul>
@@ -112,8 +113,10 @@
         {% endblock %}
 
         <footer style="margin-top: 100;">
-          <div class="container">
-              <p>copy bookcan</p>
+          <div class="container" style="text-align: center;">
+              <p>Book Can</p>
+              <p>mail: admin@bookcan.cn</p>
+
           </div>
         </footer>
 

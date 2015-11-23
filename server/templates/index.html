@@ -9,7 +9,7 @@
             {% for can in book_can %}
               <div class="list-group-item">
                 <div class="row-picture">
-                  <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+                  <img class="circle" src="/static/img/can/iconfont-duocengjiegou.png" alt="icon">
                 </div>
                 <div class="row-content">
                   <h4 class="list-group-item-heading"><a class="text-muted" href="{{url_for('can_info', id=can.id, page=1)}}">{{can.name}}</a></h4>
@@ -32,8 +32,8 @@
                       <tbody>
                       {% for book in books %}
                         <tr>
-                          <th scope="row">{{loop.index}}</th>
-                          <td>{{book.name}}</td>
+                          <th scope="row">{{loop.index}}.</th>
+                          <td><a href="{{book.link}}">{{book.name}}</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

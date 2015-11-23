@@ -21,9 +21,10 @@ ITEM_NUM_PER_PAGE = 30
 @login_manager.user_loader
 def load_user(user_id):
     user = User.query.get(int(user_id))
-    user.latest_login = datetime.now()
-    user.latest_ip = request.remote_addr
-    db.session.commit()
+    if user:
+        user.latest_login = datetime.now()
+        user.latest_ip = request.remote_addr
+        db.session.commit()
     return user
 
 
@@ -102,11 +103,14 @@ def book_info(id):
             db.session.commit()
             btn = request.form.get('btn')
             if btn == u'继续添加':
-                return render_template('add_book.html', form=BookForm(), id=id)
+                form.name.data = None
+                form.link.data = None
+                form.intro.data = None
+                return render_template('add_book.html', form=form, id=id)
             else:
                 return redirect(url_for('can_info', id=id, page=1))
         else:
-            flash('wrong')
+            flash('提交失败，请重新填写')
             return render_template('add_book.html', form=form)
 
 
@@ -136,7 +140,6 @@ def logout():
 
 
 @app.route('/regist', methods=['GET', 'POST'])
-@login_required
 def regist():
     form = RegistForm()
     if request.method == 'GET':
